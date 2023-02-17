@@ -79,7 +79,7 @@ struct ContentView: View {
             
             Button("cloudkit delete all") {
                 
-                let query = CKQuery(recordType: "testProfilesForApps", predicate: NSPredicate(value: true))
+                let query = CKQuery(recordType: "apptest", predicate: NSPredicate(value: true))
                 
                 dbs.perform(query, inZoneWith: nil) { (records, error) in
                     if let error = error {
@@ -117,7 +117,55 @@ struct ContentView: View {
 
 
             }
-
+            
+            Button {
+                print("getting the apps")
+                Task {
+                    do {
+                        let appResponse: AppResponse = try await ApiManager.shared.getData(from: .getApps)
+                            //                        dump(appResponse)
+                        
+                        for app in appResponse.apps {
+                            let record = CKRecord(recordType: "apptest", recordID: CKRecord.ID(recordName: "\(app.bundleId)-\(app.id)"))
+                            record["appBundleId"] = app.bundleId
+                            record["name"] = app.name
+                            record["id"] = app.id
+                            record["locationId"] = app.locationId
+                            record["description"] = app.description
+                            record["icon"] = app.icon
+                            record["category"] = "dummy"
+                            record["profileName"] = "duummy"
+                                /// save it
+                            dbs.save(record) { (record, error) in
+                                print("```* - * - Saving . . .")
+                             //   DispatchQueue.main.async {
+                                    if let error = error {
+                                        print("```* - * - error saving it \(error)")
+                                    } else {
+                                        print("```* - * - succesful ***")
+                                        print(record as Any)
+                                    }
+                                // }
+                            }
+                            print(app.name)
+                            print("\(app.bundleId)-\(app.id)")
+                        }
+                        
+                    } catch let error as ApiError {
+                            //  FIXME: -  put in alert that will display approriate error message
+                        print(error.description)
+                    }
+                    
+                    print("in task after do")
+                    
+                }
+                print("after task")
+                
+            } label: {
+                Text("get the apps")
+            }
+            
+            
         }
         .padding()
     }

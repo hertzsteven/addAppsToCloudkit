@@ -25,6 +25,7 @@ enum ApiEndpoint {
     case addUser(username: String, password: String, email: String, firstName: String, lastName: String, locationId: Int)
     case deleteaUser(id: Int)
     case updateaUser(id: Int, username: String, password: String, email: String, firstName: String, lastName: String, locationId: Int)
+    case getApps
 
 }
 
@@ -49,7 +50,8 @@ extension ApiEndpoint {
             return "/users/\(id)"
         case .updateaUser(let id, username: _, password: _, email: _, firstName: _, lastName: _, locationId: _):
             return "/users/\(id)"
-
+        case .getApps:
+            return "/apps"
         }
     }
     

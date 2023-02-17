@@ -15,6 +15,8 @@
 		46A12C81299F15A800230F79 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C7E299F15A800230F79 /* ApiEndpoint.swift */; };
 		46A12C82299F15A800230F79 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C7F299F15A800230F79 /* ApiError.swift */; };
 		46A12C83299F15A800230F79 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C80299F15A800230F79 /* ApiManager.swift */; };
+		46A12CA5299F194000230F79 /* AppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA4299F194000230F79 /* AppResponse.swift */; };
+		46A12CA7299F19B900230F79 /* Appi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA6299F19B800230F79 /* Appi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		46A12C7E299F15A800230F79 /* ApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
 		46A12C7F299F15A800230F79 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		46A12C80299F15A800230F79 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		46A12CA4299F194000230F79 /* AppResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponse.swift; sourceTree = "<group>"; };
+		46A12CA6299F19B800230F79 /* Appi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 		46A12C7B299F154100230F79 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				46A12CA4299F194000230F79 /* AppResponse.swift */,
+				46A12CA6299F19B800230F79 /* Appi.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -171,6 +177,8 @@
 				46A12C6E299F11B700230F79 /* ContentView.swift in Sources */,
 				46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */,
 				46A12C82299F15A800230F79 /* ApiError.swift in Sources */,
+				46A12CA5299F194000230F79 /* AppResponse.swift in Sources */,
+				46A12CA7299F19B900230F79 /* Appi.swift in Sources */,
 				46A12C83299F15A800230F79 /* ApiManager.swift in Sources */,
 				46A12C81299F15A800230F79 /* ApiEndpoint.swift in Sources */,
 			);

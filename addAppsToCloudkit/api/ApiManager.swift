@@ -201,6 +201,10 @@ private extension ApiManager {
             }
             """
             request.httpBody = bodyString.data(using: .utf8, allowLossyConversion: true)
+
+        case .getApps:
+            request.addValue(ApiHelper.authorizationCode, forHTTPHeaderField: "Authorization")
+
         }
         
         return request
