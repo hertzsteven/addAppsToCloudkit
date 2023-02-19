@@ -2,82 +2,83 @@
 
 import SwiftUI
 
-struct Person: Identifiable {
+struct Appo: Identifiable {
     let id = UUID()
+    let cloudkitKey: String
     var name: String
-    var description: String?
+    var category: String?
 }
 
 struct PersonListView: View {
-    @State private var people: [Person] = [
-        Person(name: "John", description: "John is a software engineer."),
-        Person(name: "Jane", description: "Jane is a teacher."),
-        Person(name: "Bob")
+    @State private var appos: [Appo] = [
+        Appo(cloudkitKey: "ca.ripplepublishing.countsortmatch-1", name: "Count, Sort and Match", category: "Numbers"),
+        Appo(cloudkitKey: "busythings.qdapps.feedthemonkey-193", name: "Feed the Monkey", category: "Alphabet"),
+        Appo(cloudkitKey: "mobi.abcmouse.academy-190", name: "ABCmouse.com")
     ]
     
     var body: some View {
         NavigationView {
-            List(people) { person in
+            List(appos) { appo in
                 NavigationLink(
-                    destination: DescriptionView(person: person, didUpdateDescription: { description in
-                        self.didUpdateDescription(for: person, with: description)
+                    destination: DescriptionView(appo: appo, didUpdateDescription: { category in
+                        self.didUpdateDescription(for: appo, with: category)
                     }),
                     label: {
                         HStack {
-                            Text(person.name)
+                            Text(appo.name)
                             Spacer()
-                            if let description = person.description {
-                                Text(description)
+                            if let category = appo.category {
+                                Text(category)
                                     .foregroundColor(.gray)
                             }
                         }
                     })
             }
-            .navigationTitle("People")
+            .navigationTitle("Apps")
         }
     }
     
-    func didUpdateDescription(for person: Person, with description: String) {
-        if let index = people.firstIndex(where: { $0.id == person.id }) {
-            if people[index].description != description {
-                people[index].description = description
-                showAlert(for: person)
+    func didUpdateDescription(for appo: Appo, with category: String) {
+        if let index = appos.firstIndex(where: { $0.id == appo.id }) {
+            if appos[index].category != category {
+                appos[index].category = category
+                showAlert(for: appo)
             }
         }
     }
     
-    func showAlert(for person: Person) {
-        let alert = UIAlertController(title: "Description Updated", message: "\(person.name)'s description has been updated.", preferredStyle: .alert)
+    func showAlert(for appo: Appo) {
+        let alert = UIAlertController(title: "Description Updated", message: "\(appo.name)'s category has been updated.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true)
     }
 }
 
 struct DescriptionView: View {
-    @State private var description: String
+    @State private var category: String
     private let originalDescription: String
-    var person: Person
+    var appo: Appo
     var didUpdateDescription: (String) -> Void
     
-    init(person: Person, didUpdateDescription: @escaping (String) -> Void) {
-        self.person = person
-        self._description = State(initialValue: person.description ?? "")
-        self.originalDescription = person.description ?? ""
+    init(appo: Appo, didUpdateDescription: @escaping (String) -> Void) {
+        self.appo = appo
+        self._category = State(initialValue: appo.category ?? "")
+        self.originalDescription = appo.category ?? ""
         self.didUpdateDescription = didUpdateDescription
     }
     
     var body: some View {
         VStack {
-            Text(person.name)
+            Text(appo.name)
                 .font(.title)
                 .padding(.bottom)
-            TextEditor(text: $description)
+            TextEditor(text: $category)
                 .padding()
         }
         .onDisappear {
-            if self.description != self.originalDescription {
-                // Save the description if it has changed
-                didUpdateDescription(description)
+            if self.category != self.originalDescription {
+                // Save the category if it has changed
+                didUpdateDescription(category)
             }
         }
     }
