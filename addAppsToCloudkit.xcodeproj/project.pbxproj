@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		464C089E29A272BD00A1FFB3 /* LearnScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */; };
+		464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */; };
 		46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D87299FAD9300FA245E /* listFromiCloud.swift */; };
 		46909D8A299FC81200FA245E /* ListStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D89299FC81200FA245E /* ListStub.swift */; };
 		46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnScrollView.swift; sourceTree = "<group>"; };
+		464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionSecondScreenWithTextHilite.swift; sourceTree = "<group>"; };
 		46909D87299FAD9300FA245E /* listFromiCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listFromiCloud.swift; sourceTree = "<group>"; };
 		46909D89299FC81200FA245E /* ListStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStub.swift; sourceTree = "<group>"; };
 		46A12C68299F11B700230F79 /* addAppsToCloudkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = addAppsToCloudkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +78,8 @@
 				46A12C79299F125700230F79 /* addAppsToCloudkit.entitlements */,
 				46A12C6D299F11B700230F79 /* ContentView.swift */,
 				46909D89299FC81200FA245E /* ListStub.swift */,
+				464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */,
+				464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */,
 				46909D87299FAD9300FA245E /* listFromiCloud.swift */,
 				46A12C6F299F11B900230F79 /* Assets.xcassets */,
 				46A12C71299F11B900230F79 /* Preview Content */,
@@ -185,7 +191,9 @@
 				46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */,
 				46A12C82299F15A800230F79 /* ApiError.swift in Sources */,
 				46A12CA5299F194000230F79 /* AppResponse.swift in Sources */,
+				464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */,
 				46A12CA7299F19B900230F79 /* Appx.swift in Sources */,
+				464C089E29A272BD00A1FFB3 /* LearnScrollView.swift in Sources */,
 				46909D8A299FC81200FA245E /* ListStub.swift in Sources */,
 				46A12C83299F15A800230F79 /* ApiManager.swift in Sources */,
 				46A12C81299F15A800230F79 /* ApiEndpoint.swift in Sources */,
