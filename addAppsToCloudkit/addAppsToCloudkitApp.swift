@@ -11,7 +11,7 @@ import SwiftUI
 struct addAppsToCloudkitApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListStub()
         }
     }
 }

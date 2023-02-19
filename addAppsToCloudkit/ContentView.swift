@@ -13,12 +13,60 @@ struct ContentView: View {
         return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
     }
 
+    fileprivate func updateAddRecUsing(theID recordID: CKRecord.ID, withName name: String) {
+        dbs.fetch(withRecordID: recordID) { (record, error) in
+            if let error = error {
+                print("Error fetching record: \(error)")
+            } else if let record = record {
+                record["name"] = name
+                dbs.save(record) { (record, error) in
+                    print("```* - * - Saving . . .")
+                    if let error = error {
+                        print("```* - * - error saving it \(error)")
+                    } else {
+                        print("```* - * - succesful ***")
+                    }
+                }
+                print("Fetched record: \(record)")
+            } else {
+                print("Record not found")
+            }
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 15) {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+            
+            Button("add or update") {
+                    // Create a CKRecord.ID object from the record name and zone ID
+                    let recordID = CKRecord.ID(recordName: "com.thup.fixit-196")
+
+                updateAddRecUsing(theID: recordID, withName: "from function")
+
+                
+                
+                    /// Instantiate a CKRecord with the CKRecordID
+//                 let record = CKRecord(recordType: "testProfilesForApps", recordID: CKRecord.ID(recordName: "com.pinger.chalktalk"))
+//                     /// populate the 2 fields
+//                 record["appBundleId"] = "xxxiCloud.com.developItSolutions.StudentLogins"
+//                 record["name"] = "third one"
+//                     /// save it
+//                 dbs.save(record) { (record, error) in
+//                     print("```* - * - Saving . . .")
+//                          if let error = error {
+//                             print("```* - * - error saving it \(error)")
+//                         } else {
+//                             print("```* - * - succesful ***")
+//                             print(record as Any)
+//                         }
+//
+//                 }
+
+            }
             
             Button("cloudkit add data") {
                 
@@ -75,7 +123,6 @@ struct ContentView: View {
                       }
                   }
             }
-
             
             Button("cloudkit delete all") {
                 

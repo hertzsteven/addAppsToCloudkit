@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D87299FAD9300FA245E /* listFromiCloud.swift */; };
+		46909D8A299FC81200FA245E /* ListStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D89299FC81200FA245E /* ListStub.swift */; };
 		46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */; };
 		46A12C6E299F11B700230F79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C6D299F11B700230F79 /* ContentView.swift */; };
 		46A12C70299F11B900230F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46A12C6F299F11B900230F79 /* Assets.xcassets */; };
@@ -16,10 +18,12 @@
 		46A12C82299F15A800230F79 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C7F299F15A800230F79 /* ApiError.swift */; };
 		46A12C83299F15A800230F79 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C80299F15A800230F79 /* ApiManager.swift */; };
 		46A12CA5299F194000230F79 /* AppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA4299F194000230F79 /* AppResponse.swift */; };
-		46A12CA7299F19B900230F79 /* Appi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA6299F19B800230F79 /* Appi.swift */; };
+		46A12CA7299F19B900230F79 /* Appx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA6299F19B800230F79 /* Appx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46909D87299FAD9300FA245E /* listFromiCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listFromiCloud.swift; sourceTree = "<group>"; };
+		46909D89299FC81200FA245E /* ListStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStub.swift; sourceTree = "<group>"; };
 		46A12C68299F11B700230F79 /* addAppsToCloudkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = addAppsToCloudkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAppsToCloudkitApp.swift; sourceTree = "<group>"; };
 		46A12C6D299F11B700230F79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -31,7 +35,7 @@
 		46A12C7F299F15A800230F79 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		46A12C80299F15A800230F79 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		46A12CA4299F194000230F79 /* AppResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponse.swift; sourceTree = "<group>"; };
-		46A12CA6299F19B800230F79 /* Appi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appi.swift; sourceTree = "<group>"; };
+		46A12CA6299F19B800230F79 /* Appx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appx.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +68,13 @@
 		46A12C6A299F11B700230F79 /* addAppsToCloudkit */ = {
 			isa = PBXGroup;
 			children = (
+				46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */,
 				46A12C7B299F154100230F79 /* models */,
 				46A12C7A299F152700230F79 /* api */,
 				46A12C79299F125700230F79 /* addAppsToCloudkit.entitlements */,
-				46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */,
 				46A12C6D299F11B700230F79 /* ContentView.swift */,
+				46909D89299FC81200FA245E /* ListStub.swift */,
+				46909D87299FAD9300FA245E /* listFromiCloud.swift */,
 				46A12C6F299F11B900230F79 /* Assets.xcassets */,
 				46A12C71299F11B900230F79 /* Preview Content */,
 			);
@@ -98,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				46A12CA4299F194000230F79 /* AppResponse.swift */,
-				46A12CA6299F19B800230F79 /* Appi.swift */,
+				46A12CA6299F19B800230F79 /* Appx.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -176,9 +182,11 @@
 				46A12C7D299F157F00230F79 /* ApiHelper.swift in Sources */,
 				46A12C6E299F11B700230F79 /* ContentView.swift in Sources */,
 				46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */,
+				46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */,
 				46A12C82299F15A800230F79 /* ApiError.swift in Sources */,
 				46A12CA5299F194000230F79 /* AppResponse.swift in Sources */,
-				46A12CA7299F19B900230F79 /* Appi.swift in Sources */,
+				46A12CA7299F19B900230F79 /* Appx.swift in Sources */,
+				46909D8A299FC81200FA245E /* ListStub.swift in Sources */,
 				46A12C83299F15A800230F79 /* ApiManager.swift in Sources */,
 				46A12C81299F15A800230F79 /* ApiEndpoint.swift in Sources */,
 			);
