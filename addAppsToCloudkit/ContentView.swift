@@ -10,8 +10,9 @@ import CloudKit
 
 struct ContentView: View {
     var dbs : CKDatabase {
+//        return CKContainer(identifier: "iCloud.com.developItSolutions.teststudentlogin").publicCloudDatabase
         return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
-    }
+      }
 
     fileprivate func updateAddRecUsing(theID recordID: CKRecord.ID, withName name: String) {
         dbs.fetch(withRecordID: recordID) { (record, error) in
@@ -146,23 +147,59 @@ struct ContentView: View {
             }
             
             Button("cloudkit print all") {
-
-                let recordType = "testProfilesForApps"
-                 let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
-
-                dbs.perform(query, inZoneWith: nil) { (records, error) in
+                
+                let recordType = "appProfiles"
+                let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
+                
+                let operation = CKQueryOperation(query: query)
+                
+                operation.resultsLimit = 500 // Set the limit to 500 records
+                
+                    //                var allRecords = [CKRecord]() // Array to hold all the fetched records
+                
+                operation.recordFetchedBlock = { record in
+                    if let fieldValue = record["name"] as? String {
+                                                   print(" \(fieldValue) -  \(record.recordID.recordName) ")
+                                               }
+//                    if let records = records {
+//                        print(records.count)
+//                        for record in records {
+//                            if let fieldValue = record["name"] as? String {
+//                                print(" \(fieldValue) -  \(record.recordID.recordName) ")
+//                            }
+//                        }
+//                    }
+                    
+                }
+                
+                
+                
+                operation.queryCompletionBlock = { (cursor, error) in
                     if let error = error {
                         print("Error fetching records: \(error.localizedDescription)")
-                    } else if let records = records {
-                        for record in records {
-                            if let fieldValue = record["name"] as? String {
-                                print("Record ID: \(record.recordID.recordName), Field Value: \(fieldValue)")
-                            }
-                        }
+                    } else  {
+                        print("things worked")
                     }
                 }
-
-
+                dbs.add(operation)
+                /*
+                 let recordType = "appProfiles"
+                 let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
+                 
+                 dbs.perform(query, inZoneWith: nil) { (records, error) in
+                 if let error = error {
+                 print("Error fetching records: \(error.localizedDescription)")
+                 } else if let records = records {
+                 print(records.count)
+                 for record in records {
+                 if let fieldValue = record["name"] as? String {
+                 print(" \(fieldValue) -  \(record.recordID.recordName) ")
+                 }
+                 }
+                 }
+                 }
+                 */
+                
             }
             
             Button {
@@ -173,29 +210,44 @@ struct ContentView: View {
                             //                        dump(appResponse)
                         
                         for app in appResponse.apps {
-                            let record = CKRecord(recordType: "appProfiles", recordID: CKRecord.ID(recordName: "\(app.bundleId)"))
-                            record["appBundleId"] = app.bundleId
-                            record["name"] = app.name
-                            record["id"] = app.id
-                            record["locationId"] = app.locationId
-                            record["description"] = app.description
-                            record["icon"] = app.icon
-                            record["category"] = "dummy"
-                            record["profileName"] = "duummy"
-                                /// save it
-                            dbs.save(record) { (record, error) in
-                                print("```* - * - Saving . . .")
-                             //   DispatchQueue.main.async {
+                                //                            let record = CKRecord(recordType: "appProfiles", recordID: CKRecord.ID(recordName: "\(app.bundleId)"))
+                            do {
+                                print(app.name, app.bundleId)
+                                
+                                if app.name.contains("TeachMe") {
+                                    print(app.name, "it is doodle")
+//                                let recordID = CKRecord.ID(recordName: "\(app.bundleId)-\(app.id)")
+                                    let record = CKRecord(recordType: "appProfiles", recordID: CKRecord.ID(recordName: "\(app.bundleId)"))
+                                    record["appBundleId"] = app.bundleId
+                                    record["name"] = app.name
+                                    record["id"] = app.id
+                                    record["locationId"] = app.locationId
+                                    record["description"] = app.description
+                                    record["icon"] = app.icon
+                                    record["category"] = "dummy"
+                                    record["profileName"] = "duummy"
+                                    /// save it
+                                    dbs.save(record) { (record, error) in
+                                    print("```* - * - Saving . . .")
+                                        //   DispatchQueue.main.async {
                                     if let error = error {
                                         print("```* - * - error saving it \(error)")
                                     } else {
                                         print("```* - * - succesful ***")
                                         print(record as Any)
                                     }
-                                // }
+                                         }
+                                } else {
+//                                    print("not doing ", app.name)
+//                                    print("\(app.bundleId)-\(app.id)")
+                                }
+//                            }
+                        }
+ 
+                                
+                            catch {
+                                print("Error fetching records: \(error.localizedDescription)")
                             }
-                            print(app.name)
-                            print("\(app.bundleId)-\(app.id)")
                         }
                         
                     } catch let error as ApiError {

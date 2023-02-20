@@ -258,7 +258,7 @@ struct PersonListView: View {
                 let theId = CKRecord.ID(recordName: appo.cloudkitKey)
                 await updateAddRecUsing(theID: theId, withCategory: category)
                 DispatchQueue.main.async {
-                    showAlert(for: appo)
+//                    showAlert(for: appo)
                 }
                 
             }
@@ -272,7 +272,7 @@ struct PersonListView: View {
                 let theId = CKRecord.ID(recordName: appo.cloudkitKey)
                 await updateAddRecUsing(theID: theId, withprofileName: profileName)
                 DispatchQueue.main.async {
-                    showAlert(for: appo)
+//                    showAlert(for: appo)
                 }
                 
             }
@@ -314,14 +314,46 @@ struct DescriptionView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button {
-                    print(appWork.selectedProfileFromList)
-                    profileName = appWork.selectedProfileFromList
-                } label: {
-                    Text("do profile")
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack {
+                    Button {
+                        print(appWork.selectedProfileFromList)
+                        profileName = appWork.selectedProfileFromList
+                    } label: {
+                        Text("do profile")
+                    }
+                    Button {
+                        category = "Alphabet"
+                    } label: {
+                        Text("Alphabet")
+                    }
+                    Button {
+                        category = "Cognition"
+                    } label: {
+                        Text("Cognition")
+                    }
+                    Button {
+                        category = "Creativity"
+                    } label: {
+                        Text("Creativity")
+                    }
+                    Button {
+                        category = "Curricula"
+                    } label: {
+                        Text("Curricula")
+                    }
+                    Button {
+                        category = "Mathematics"
+                    } label: {
+                        Text("Mathematics")
+                    }
+                    Button {
+                        category = "Curricula"
+                    } label: {
+                        Text("Curricula")
+                    }
+ 
                 }
-
             }
             Text(appo.name)
                 .font(.title)
