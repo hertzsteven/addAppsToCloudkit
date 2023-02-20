@@ -56,7 +56,7 @@ struct ListStub: View {
                 
         .onAppear {
             Task {
-                let recordType = "apptest"
+                let recordType = "appProfiles"
                 let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
                 let dbs = CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
                 

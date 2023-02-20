@@ -126,7 +126,7 @@ struct ContentView: View {
             
             Button("cloudkit delete all") {
                 
-                let query = CKQuery(recordType: "apptest", predicate: NSPredicate(value: true))
+                let query = CKQuery(recordType: "appProfiles", predicate: NSPredicate(value: true))
                 
                 dbs.perform(query, inZoneWith: nil) { (records, error) in
                     if let error = error {
@@ -173,7 +173,7 @@ struct ContentView: View {
                             //                        dump(appResponse)
                         
                         for app in appResponse.apps {
-                            let record = CKRecord(recordType: "apptest", recordID: CKRecord.ID(recordName: "\(app.bundleId)"))
+                            let record = CKRecord(recordType: "appProfiles", recordID: CKRecord.ID(recordName: "\(app.bundleId)"))
                             record["appBundleId"] = app.bundleId
                             record["name"] = app.name
                             record["id"] = app.id

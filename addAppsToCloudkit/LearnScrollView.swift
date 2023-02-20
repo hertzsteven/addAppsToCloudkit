@@ -22,31 +22,49 @@ struct PersonListView: View {
     let profileNames = [
         "10 fingers +",
         "123 Genius PRO - First Numbers and Counting Games ",
+        "123 Genius PRO - First Numbers and Counting Games",
         "ABC - Magnetic Alphabet HD for Kids",
+        "ABC Genius PRO - Alphabet, Phonics, and Handwriting",
         "Alphabet Sounds Learning App",
         "Alphabet Sounds Word Study",
+        "AlphaTots Alphabet",
+        "Busy Shapes",
         "Butterfly Math",
         "Categories - Categorization Skill Development App",
         "Count, Sort and Match",
         "Counting Bear - Easily Learn How to Count",
         "Counting Bears",
         "Counting Dots: Number Practice",
+        "Dexteria Jr. - Fine Motor Skill Development",
         "Dominoes Addition",
         "Doodle Buddy Paint Draw App",
+        "Dr. Seuss's ABC - Read & Learn",
         "Draw and Tell HD",
+        "Elmo Loves 123s",
+        "Elmo Loves ABCs",
         "Endless Alphabet",
+        "Endless Numbers: School Ed.",
+        "Endless Numbers",
+        "Farm 123 - Learn to count",
         "Feed the Monkey",
         "First Letters & Phonics",
         "First Letters and Phonics",
         "First Words Deluxe",
         "Following Directions Game",
         "Geoboard, by The Math Learning Center",
+        "Interactive Alphabet ABC's",
         "iTrace - handwriting for kids",
+        "Learning Patterns - Pattern & Logic Game for Kids",
         "Learning Patterns PRO - Develop Thinking Skills",
+        "Learning Patterns PRO - Help Kids Develop Thinking",
         "LetterSchool - Block Letters",
+        "LetterSchool - Learn to Write!",
         "Line 'em Up",
         "Little Writer Pro",
         "Little Writer Tracing App: Trace Letters & Numbers",
+        "Marbotic 10 fingers",
+        "Marbotic Learn to Read & Count",
+        "Marbotic Smart Shapes",
         "Monkey Math School Sunshine",
         "Monkey Preschool Fix-It ",
         "Monkey Preschool Fix-It",
@@ -54,6 +72,8 @@ struct PersonListView: View {
         "Montessori Numbers for Kids",
         "Moose Math - Duck Duck Moose",
         "Moose Math",
+        "My PlayHome School",
+        "On The Farm ~ Touch, Look, Listen",
         "Oxford Phonics World: Personal",
         "Park Math HD - Duck Duck Moose",
         "Park Math",
@@ -73,11 +93,19 @@ struct PersonListView: View {
         "Starfall ABC",
         "Starfall ABCs",
         "Startdot Handwriting",
+        "Student Signin",
         "TallyTots Counting",
+        "Teachers' Pack 1",
+        "Teachers' Pack 3",
         "TeachMe: Preschool - Toddler ",
+        "Things That Go ~ Touch, Look, Listen",
+        "Things That Go Together",
+        "Touch, Look, Listen ~ My First Words",
+        "What Do I Wear? ~ Touch, Look, Listen",
         "Word Wagon by Duck Duck Moose",
         "Word Wizard for Kids School Ed",
-        "Writing Wizard - School Ed"
+        "Writing Wizard - School Ed.",
+        "Zoo Animals ~ Touch, Look, Listen"
     ]
     
     
@@ -164,7 +192,7 @@ struct PersonListView: View {
         }
         .onAppear {
             Task {
-                let recordType = "apptest"
+                let recordType = "appProfiles"
                 
                 // Create a predicate that filters records where the "category" property is equal to "Math"
                 let predicate = NSPredicate(format: "category = %@", "Nnnnn")
