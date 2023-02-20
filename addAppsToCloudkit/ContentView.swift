@@ -173,7 +173,7 @@ struct ContentView: View {
                             //                        dump(appResponse)
                         
                         for app in appResponse.apps {
-                            let record = CKRecord(recordType: "apptest", recordID: CKRecord.ID(recordName: "\(app.bundleId)-\(app.id)"))
+                            let record = CKRecord(recordType: "apptest", recordID: CKRecord.ID(recordName: "\(app.bundleId)"))
                             record["appBundleId"] = app.bundleId
                             record["name"] = app.name
                             record["id"] = app.id

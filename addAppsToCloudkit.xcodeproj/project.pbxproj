@@ -21,6 +21,7 @@
 		46A12C83299F15A800230F79 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C80299F15A800230F79 /* ApiManager.swift */; };
 		46A12CA5299F194000230F79 /* AppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA4299F194000230F79 /* AppResponse.swift */; };
 		46A12CA7299F19B900230F79 /* Appx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12CA6299F19B800230F79 /* Appx.swift */; };
+		46ABA77029A2F13F00B158B4 /* CategoryPickerview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ABA76F29A2F13F00B158B4 /* CategoryPickerview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		46A12C80299F15A800230F79 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		46A12CA4299F194000230F79 /* AppResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponse.swift; sourceTree = "<group>"; };
 		46A12CA6299F19B800230F79 /* Appx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appx.swift; sourceTree = "<group>"; };
+		46ABA76F29A2F13F00B158B4 /* CategoryPickerview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				46A12C6D299F11B700230F79 /* ContentView.swift */,
 				46909D89299FC81200FA245E /* ListStub.swift */,
 				464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */,
+				46ABA76F29A2F13F00B158B4 /* CategoryPickerview.swift */,
 				464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */,
 				46909D87299FAD9300FA245E /* listFromiCloud.swift */,
 				46A12C6F299F11B900230F79 /* Assets.xcassets */,
@@ -189,6 +192,7 @@
 				46A12C6E299F11B700230F79 /* ContentView.swift in Sources */,
 				46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */,
 				46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */,
+				46ABA77029A2F13F00B158B4 /* CategoryPickerview.swift in Sources */,
 				46A12C82299F15A800230F79 /* ApiError.swift in Sources */,
 				46A12CA5299F194000230F79 /* AppResponse.swift in Sources */,
 				464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */,
