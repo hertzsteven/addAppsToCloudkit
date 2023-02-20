@@ -149,57 +149,26 @@ struct ContentView: View {
             Button("cloudkit print all") {
                 
                 let recordType = "appProfiles"
+                
                 let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
-                
                 let operation = CKQueryOperation(query: query)
-                
                 operation.resultsLimit = 500 // Set the limit to 500 records
-                
-                    //                var allRecords = [CKRecord]() // Array to hold all the fetched records
+//                var allRecords = [CKRecord]() // Array to hold all the fetched records
                 
                 operation.recordFetchedBlock = { record in
                     if let fieldValue = record["name"] as? String {
-                                                   print(" \(fieldValue) -  \(record.recordID.recordName) ")
-                                               }
-//                    if let records = records {
-//                        print(records.count)
-//                        for record in records {
-//                            if let fieldValue = record["name"] as? String {
-//                                print(" \(fieldValue) -  \(record.recordID.recordName) ")
-//                            }
-//                        }
-//                    }
-                    
+                        print(" \(fieldValue) -  \(record.recordID.recordName) ")
+                    }
                 }
-                
-                
                 
                 operation.queryCompletionBlock = { (cursor, error) in
                     if let error = error {
                         print("Error fetching records: \(error.localizedDescription)")
                     } else  {
-                        print("things worked")
+                        print("****** things worked")
                     }
                 }
                 dbs.add(operation)
-                /*
-                 let recordType = "appProfiles"
-                 let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
-                 
-                 dbs.perform(query, inZoneWith: nil) { (records, error) in
-                 if let error = error {
-                 print("Error fetching records: \(error.localizedDescription)")
-                 } else if let records = records {
-                 print(records.count)
-                 for record in records {
-                 if let fieldValue = record["name"] as? String {
-                 print(" \(fieldValue) -  \(record.recordID.recordName) ")
-                 }
-                 }
-                 }
-                 }
-                 */
-                
             }
             
             Button {

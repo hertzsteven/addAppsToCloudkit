@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		464C089E29A272BD00A1FFB3 /* LearnScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */; };
+		464C089E29A272BD00A1FFB3 /* PersonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089D29A272BD00A1FFB3 /* PersonListView.swift */; };
 		464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */; };
 		46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D87299FAD9300FA245E /* listFromiCloud.swift */; };
 		46909D8A299FC81200FA245E /* ListStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D89299FC81200FA245E /* ListStub.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnScrollView.swift; sourceTree = "<group>"; };
+		464C089D29A272BD00A1FFB3 /* PersonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListView.swift; sourceTree = "<group>"; };
 		464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionSecondScreenWithTextHilite.swift; sourceTree = "<group>"; };
 		46909D87299FAD9300FA245E /* listFromiCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listFromiCloud.swift; sourceTree = "<group>"; };
 		46909D89299FC81200FA245E /* ListStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStub.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 				46A12C79299F125700230F79 /* addAppsToCloudkit.entitlements */,
 				46A12C6D299F11B700230F79 /* ContentView.swift */,
 				46909D89299FC81200FA245E /* ListStub.swift */,
-				464C089D29A272BD00A1FFB3 /* LearnScrollView.swift */,
+				464C089D29A272BD00A1FFB3 /* PersonListView.swift */,
 				46ABA77129A39F9100B158B4 /* AppWork.swift */,
 				46ABA76F29A2F13F00B158B4 /* CategoryPickerview.swift */,
 				464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */,
@@ -200,7 +200,7 @@
 				46A12CA5299F194000230F79 /* AppResponse.swift in Sources */,
 				464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */,
 				46A12CA7299F19B900230F79 /* Appx.swift in Sources */,
-				464C089E29A272BD00A1FFB3 /* LearnScrollView.swift in Sources */,
+				464C089E29A272BD00A1FFB3 /* PersonListView.swift in Sources */,
 				46ABA77229A39F9100B158B4 /* AppWork.swift in Sources */,
 				46909D8A299FC81200FA245E /* ListStub.swift in Sources */,
 				46A12C83299F15A800230F79 /* ApiManager.swift in Sources */,

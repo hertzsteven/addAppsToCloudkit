@@ -192,35 +192,74 @@ struct PersonListView: View {
         }
         .onAppear {
             Task {
-                let recordType = "appProfiles"
-                
-                // Create a predicate that filters records where the "category" property is equal to "Math"
-                let predicate = NSPredicate(format: "category = %@", "Nnnnn")
+                Task {
+                    let recordType = "appProfiles"
+                    // Create a predicate that filters records where the "category" property is equal to "Math"
+                    let predicate = NSPredicate(format: "category = %@", "Nnnnn")
 
-                let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
-//                let query = CKQuery(recordType: recordType, predicate: predicate)
+                    let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
+                    let operation = CKQueryOperation(query: query)
+                    operation.resultsLimit = 500 // Set the limit to 500 records
+    //                var allRecords = [CKRecord]() // Array to hold all the fetched records
+                    var newAppos = [Appo]()
+                    operation.recordFetchedBlock = { record in
+                            guard   let nameValue           = record["name"] as? String,
+                                    let cloudkitKeyValue    = record.recordID.recordName as? String,
+                                    let categoryValue       = record["category"] as? String,
+                                    let profileNameValue    = record["profileName"] as? String
+                            else { fatalError("didnt work") }
+                            newAppos.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
+            
+                   }
+                    
+                    operation.queryCompletionBlock = { (cursor, error) in
+                        if let error = error {
+                            print("Error fetching records: \(error.localizedDescription)")
+                        } else  {
+                            print("things worked")
+                        DispatchQueue.main.async {
+                            self.appos = newAppos.sorted()
+                        }
 
-                let dbs = CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
-                
-                do {
-                    let records = try await dbs.perform(query, inZoneWith: nil)
-                    let newAppos = records.compactMap { record -> Appo? in
-                        guard   let nameValue           = record["name"] as? String,
-                                let cloudkitKeyValue    = record.recordID.recordName as? String,
-                                let categoryValue       = record["category"] as? String,
-                                let profileNameValue    = record["profileName"] as? String
-                        else { return nil }
-                        return Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue)
-//                        return Appx(appBundleId: bundle, name: nameValue, desc: record["description"], catg: record["category"] ?? "")
+                        }
                     }
-                    
-                    DispatchQueue.main.async {
-                        self.appos = newAppos.sorted()
-                    }
-                    
-                } catch {
-                    print("Error fetching records: \(error.localizedDescription)")
+                    dbs.add(operation)
                 }
+                    
+
+                
+                
+                
+                
+//                let recordType = "appProfiles"
+//
+//                // Create a predicate that filters records where the "category" property is equal to "Math"
+//                let predicate = NSPredicate(format: "category = %@", "Nnnnn")
+//
+//                let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
+////                let query = CKQuery(recordType: recordType, predicate: predicate)
+//
+//                let dbs = CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
+//
+//                do {
+//                    let records = try await dbs.perform(query, inZoneWith: nil)
+//                    let newAppos = records.compactMap { record -> Appo? in
+//                        guard   let nameValue           = record["name"] as? String,
+//                                let cloudkitKeyValue    = record.recordID.recordName as? String,
+//                                let categoryValue       = record["category"] as? String,
+//                                let profileNameValue    = record["profileName"] as? String
+//                        else { return nil }
+//                        return Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue)
+////                        return Appx(appBundleId: bundle, name: nameValue, desc: record["description"], catg: record["category"] ?? "")
+//                    }
+//
+//                    DispatchQueue.main.async {
+//                        self.appos = newAppos.sorted()
+//                    }
+//
+//                } catch {
+//                    print("Error fetching records: \(error.localizedDescription)")
+//                }
             }
         }
     }
@@ -321,6 +360,16 @@ struct DescriptionView: View {
                         profileName = appWork.selectedProfileFromList
                     } label: {
                         Text("do profile")
+                    }
+                    Button {
+                        category = "Pre Writing"
+                    } label: {
+                        Text("Pre Writing")
+                    }
+                    Button {
+                        category = "Reading"
+                    } label: {
+                        Text("Reading")
                     }
                     Button {
                         category = "Alphabet"
