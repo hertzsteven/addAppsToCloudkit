@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct addAppsToCloudkitApp: App {
+    
+    var appWork: AppWork = AppWork()
+    
     var body: some Scene {
         WindowGroup {
             PersonListView()
+                .environmentObject(appWork)
         }
     }
 }
