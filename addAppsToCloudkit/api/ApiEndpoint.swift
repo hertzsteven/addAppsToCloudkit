@@ -26,6 +26,7 @@ enum ApiEndpoint {
     case deleteaUser(id: Int)
     case updateaUser(id: Int, username: String, password: String, email: String, firstName: String, lastName: String, locationId: Int)
     case getApps
+    case getProfiles
 
 }
 
@@ -52,6 +53,8 @@ extension ApiEndpoint {
             return "/users/\(id)"
         case .getApps:
             return "/apps"
+        case .getProfiles:
+            return "/profiles"
         }
     }
     

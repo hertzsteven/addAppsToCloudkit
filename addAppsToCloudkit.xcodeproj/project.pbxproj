@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		464C089E29A272BD00A1FFB3 /* PersonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089D29A272BD00A1FFB3 /* PersonListView.swift */; };
 		464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */; };
+		465F20C329A42D8E00DEE306 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F20C229A42D8E00DEE306 /* ProfileResponse.swift */; };
 		46909D88299FAD9300FA245E /* listFromiCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D87299FAD9300FA245E /* listFromiCloud.swift */; };
 		46909D8A299FC81200FA245E /* ListStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D89299FC81200FA245E /* ListStub.swift */; };
 		46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		464C089D29A272BD00A1FFB3 /* PersonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListView.swift; sourceTree = "<group>"; };
 		464C089F29A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionSecondScreenWithTextHilite.swift; sourceTree = "<group>"; };
+		465F20C229A42D8E00DEE306 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		46909D87299FAD9300FA245E /* listFromiCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listFromiCloud.swift; sourceTree = "<group>"; };
 		46909D89299FC81200FA245E /* ListStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStub.swift; sourceTree = "<group>"; };
 		46A12C68299F11B700230F79 /* addAppsToCloudkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = addAppsToCloudkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 			children = (
 				46A12CA4299F194000230F79 /* AppResponse.swift */,
 				46A12CA6299F19B800230F79 /* Appx.swift */,
+				465F20C229A42D8E00DEE306 /* ProfileResponse.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				46A12C82299F15A800230F79 /* ApiError.swift in Sources */,
 				46A12CA5299F194000230F79 /* AppResponse.swift in Sources */,
 				464C08A029A279CC00A1FFB3 /* DescriptionSecondScreenWithTextHilite.swift in Sources */,
+				465F20C329A42D8E00DEE306 /* ProfileResponse.swift in Sources */,
 				46A12CA7299F19B900230F79 /* Appx.swift in Sources */,
 				464C089E29A272BD00A1FFB3 /* PersonListView.swift in Sources */,
 				46ABA77229A39F9100B158B4 /* AppWork.swift in Sources */,

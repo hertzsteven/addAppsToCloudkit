@@ -171,6 +171,22 @@ struct ContentView: View {
                 dbs.add(operation)
             }
             
+            Button("get profiles") {
+                print("getting the apps")
+                Task {
+                    do {
+                        let profileResponse: ProfileResponse = try await ApiManager.shared.getData(from: .getProfiles)
+                            dump(profileResponse)
+                        let names = profileResponse.profiles.map {
+                            $0.name.replacingOccurrences(of: "Profile-App-1Kiosk ", with: "").replacingOccurrences(of: "Profile-App-Kiosk ", with: "")
+                        }
+                    } catch let error as ApiError {
+                             //  FIXME: -  put in alert that will display approriate error message
+                         print(error.description)
+                     }
+                 }
+            }
+            
             Button {
                 print("getting the apps")
                 Task {

@@ -205,6 +205,10 @@ private extension ApiManager {
         case .getApps:
             request.addValue(ApiHelper.authorizationCode, forHTTPHeaderField: "Authorization")
 
+            
+        case .getProfiles:
+            request.addValue(ApiHelper.authorizationCode, forHTTPHeaderField: "Authorization")
+
         }
         
         return request
