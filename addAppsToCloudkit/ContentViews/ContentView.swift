@@ -171,6 +171,34 @@ struct ContentView: View {
                 dbs.add(operation)
             }
             
+            Button("remove field by copying") {
+                let recordType = "MyRecordType"
+                let fieldToRemove = "fieldToRemove"
+
+                let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
+                let operation = CKQueryOperation(query: query)
+
+                operation.recordFetchedBlock = { record in
+                    // Create a new record without the field to remove
+                    let newRecord = CKRecord(recordType: recordType, recordID: record.recordID)
+                    for (key, value) in record {
+                        if key != fieldToRemove {
+                            newRecord[key] = value
+                        }
+                    }
+
+                    // Update the record in the database
+                    let modifyOperation = CKModifyRecordsOperation(recordsToSave: [newRecord], recordIDsToDelete: [record.recordID])
+                    modifyOperation.savePolicy = .changedKeys
+                    modifyOperation.modifyRecordsCompletionBlock = { savedRecords, deletedRecordIDs, error in
+                        // Handle any errors or do additional processing here
+                    }
+                    CKContainer.default().privateCloudDatabase.add(modifyOperation)
+                }
+
+                CKContainer.default().privateCloudDatabase.add(operation)
+            }
+            
             Button("get profiles") {
                 print("getting the apps")
                 Task {

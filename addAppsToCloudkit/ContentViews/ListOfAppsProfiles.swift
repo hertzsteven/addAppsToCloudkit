@@ -13,6 +13,7 @@ import CloudKit
 
 struct ListOfAppsProfiles: View {
     
+    let categoryList = ["Reading", "Alphabet", "Mathematics", "Cognition", "Curricula" ]
     
     var dbs : CKDatabase {
         return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
@@ -85,24 +86,28 @@ struct ListOfAppsProfiles: View {
     
     var body: some View {
         NavigationView {
-            List(appProfileVM.appProfiles) { appProfile in
-                HStack {
-                    AsyncImage(url: URL(string: appProfile.iconURL)) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
+            ScrollView {
+                ForEach(appProfileVM.appProfiles) { appProfile in
+                    HStack {
+                        AsyncImage(url: URL(string: appProfile.iconURL)) { image in
+                            image.resizable()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 50, height: 50)
+                        .padding([.leading])
+                        Text(appProfile.name)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 14))
+                            .frame(height: 20) // Set the height of each row
+                            .onLongPressGesture {
+                                selectedItem = appProfile
+                            }
+                        Spacer()
                     }
-                    .frame(width: 50, height: 50)
-                Text(appProfile.name)
-                    .foregroundColor(.gray)
-                    .font(.system(size: 14))
-                    .frame(height: 20) // Set the height of each row
-                }
-                .onLongPressGesture {
-                    selectedItem = appProfile
                 }
             }
-            .id(UUID())
+//            .id(UUID())
             .sheet(item: $selectedItem) { item in
                 ItemDetailView2(ckRecId: item.appBundleId)
             }
@@ -141,44 +146,63 @@ struct ListOfAppsProfiles: View {
     
 }
 
+
 struct ItemDetailView2: View {
-    
+        //
     var dbs : CKDatabase {
         return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
     }
-
+    
     let ckRecId: String
     
     @State private var comments: String?
     
     var body: some View {
         VStack {
-//            Text(<#T##S#>)
-            if let comments = comments {
-                Text(comments)
-                    .padding()
-            } else {
-                ProgressView()
-            }
+            Text("hello !")
         }
-        .onAppear {
-            Task {
-                do {
-                    let recordID = CKRecord.ID(recordName: ckRecId)
-                    let record = try await fetchRecord(recordID)
-                    comments = record["description"] as? String
-                } catch {
-                    print("Error fetching record: \(error.localizedDescription)")
-                }
-            }
-        }
-    }
-    
-    func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
-        let record = try await dbs.record(for: recordID)
-        return record
     }
 }
+
+
+//struct ItemDetailView22: View {
+//
+//    var dbs : CKDatabase {
+//        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
+//    }
+//
+//    let ckRecId: String
+//
+//    @State private var comments: String?
+//
+//    var body: some View {
+//        VStack {
+////            Text(<#T##S#>)
+//            if let comments = comments {
+//                Text(comments)
+//                    .padding()
+//            } else {
+//                ProgressView()
+//            }
+//        }
+//        .onAppear {
+//            Task {
+//                do {
+//                    let recordID = CKRecord.ID(recordName: ckRecId)
+//                    let record = try await fetchRecord(recordID)
+//                    comments = record["description"] as? String
+//                } catch {
+//                    print("Error fetching record: \(error.localizedDescription)")
+//                }
+//            }
+//        }
+//    }
+//
+//    func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
+//        let record = try await dbs.record(for: recordID)
+//        return record
+//    }
+//}
 
 struct ListOfAppsProfiles_Previews: PreviewProvider {
     static var previews: some View {
