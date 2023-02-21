@@ -14,7 +14,8 @@ struct addAppsToCloudkitApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListOfAppsProfiles()
+//            ContentView()
 //            PersonListView()
 //                .environmentObject(appWork)
         }
