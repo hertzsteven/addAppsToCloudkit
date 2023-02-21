@@ -77,7 +77,6 @@ struct ItemDetailView: View {
     }
     
     func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
-//        let dbs = CKContainer.default().publicCloudDatabase
         let record = try await dbs.record(for: recordID)
         return record
     }

@@ -33,7 +33,7 @@ struct ListOfAppsProfiles: View {
     
     @StateObject var appProfileVM = AppProfileViewModel()
     
-    
+    @State private var selectedItem: AppProfile? = nil
     
     fileprivate func getAppProfilesFromcloudKit(_ listOfNames: [String]) {
         print("*** begining getAppProfilesFromcloudKit" )
@@ -97,7 +97,14 @@ struct ListOfAppsProfiles: View {
                     .foregroundColor(.gray)
                     .font(.system(size: 14))
                     .frame(height: 20) // Set the height of each row
+                }
+                .onLongPressGesture {
+                    selectedItem = appProfile
+                }
             }
+            .id(UUID())
+            .sheet(item: $selectedItem) { item in
+                ItemDetailView2(ckRecId: item.appBundleId)
             }
             .navigationTitle("App Profiles")
             .task {
@@ -106,21 +113,13 @@ struct ListOfAppsProfiles: View {
                    
                     let listOfNames =   await try getProfilesFromMDM()
 
-                    print("*** before getAppProfilesFromcloudKit" )
                     getAppProfilesFromcloudKit(listOfNames)
-                    print("*** after getAppProfilesFromcloudKit" )
-//                        DispatchQueue.main.async {
-//                            self.appProfileVM.appProfiles = newProfilesSorted
-//                        }
-
                 
                     } catch let error as ApiError {
                              //  FIXME: -  put in alert that will display approriate error message
                          print(error.description)
                      }
-//                    print("*** end of Task" )
                  }
-//                print("*** leaving task modifier" )
             }
         }
     }
@@ -140,6 +139,45 @@ struct ListOfAppsProfiles: View {
         return listOfNames
     }
     
+}
+
+struct ItemDetailView2: View {
+    
+    var dbs : CKDatabase {
+        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
+    }
+
+    let ckRecId: String
+    
+    @State private var comments: String?
+    
+    var body: some View {
+        VStack {
+//            Text(<#T##S#>)
+            if let comments = comments {
+                Text(comments)
+                    .padding()
+            } else {
+                ProgressView()
+            }
+        }
+        .onAppear {
+            Task {
+                do {
+                    let recordID = CKRecord.ID(recordName: ckRecId)
+                    let record = try await fetchRecord(recordID)
+                    comments = record["description"] as? String
+                } catch {
+                    print("Error fetching record: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
+        let record = try await dbs.record(for: recordID)
+        return record
+    }
 }
 
 struct ListOfAppsProfiles_Previews: PreviewProvider {
