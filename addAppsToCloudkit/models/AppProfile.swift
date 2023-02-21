@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct AppProfile: Identifiable {
+struct AppProfile: Identifiable, Comparable {
+    
+    static func < (lhs: AppProfile, rhs: AppProfile) -> Bool {
+          return lhs.name < rhs.name
+      }
+    
     var  id = UUID().uuidString
     var  appBundleId : String = ""
     var  locationId : Int  = 0

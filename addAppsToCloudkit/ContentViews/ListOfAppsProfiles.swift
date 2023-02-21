@@ -31,12 +31,12 @@ struct ListOfAppsProfiles: View {
         Appo(cloudkitKey: "mobi.abcmouse.academy-190", name: "ABCmouse.com")
     ]
     
-    @StateObject var viewModel = AppProfileViewModel()
+    @StateObject var appProfileVM = AppProfileViewModel()
     
     var body: some View {
         NavigationView {
-            List(appos) { appo in
-                Text(appo.name)
+            List(appProfileVM.appProfiles) { appProfile in
+                Text(appProfile.name)
             }
             .navigationTitle("App Profiles")
             .task {
@@ -66,7 +66,7 @@ struct ListOfAppsProfiles: View {
                     let operation = CKQueryOperation(query: query)
                     operation.resultsLimit = 500 // Set the limit to 500 records
                     
-                    var newAppos = [Appo]()
+                    var newAppProfiles = [AppProfile]()
                     operation.recordFetchedBlock = { record in
                         
                         guard
@@ -81,7 +81,8 @@ struct ListOfAppsProfiles: View {
                          else { fatalError("didnt work") }
                         
                         if listOfNames.contains(nameValue) {
-                            newAppos.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
+//                            newAppProfiles.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
+                            newAppProfiles.append(AppProfile(appBundleId: appBundleIdValue, locationId: locationIdValue, category: categoryValue, profileName: profileNameValue, name: nameValue, iconURL: iconURLeValue))
                         }
 
                      }
@@ -92,7 +93,7 @@ struct ListOfAppsProfiles: View {
                         } else  {
                             print("things worked")
                             DispatchQueue.main.async {
-                                self.appos = newAppos.sorted()
+                                self.appProfileVM.appProfiles = newAppProfiles.sorted()
                             }
                         }
                     }
