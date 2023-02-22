@@ -87,26 +87,56 @@ struct ListOfAppsProfiles: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(appProfileVM.appProfiles) { appProfile in
-                    HStack {
-                        AsyncImage(url: URL(string: appProfile.iconURL)) { image in
-                            image.resizable()
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding([.leading])
-                        Text(appProfile.name)
-                            .foregroundColor(.gray)
-                            .font(.system(size: 14))
-                            .frame(height: 20) // Set the height of each row
-                            .onLongPressGesture {
-                                selectedItem = appProfile
-                            }
-                        Spacer()
-                    }
-                }
-            }
+                ForEach(categoryList, id: \.self) { category in
+                     DisclosureGroup(
+                         content: {
+                             ForEach(appProfileVM.appProfiles.filter { $0.category.contains(category) }) { appProfile in
+                                 HStack {
+                                     AsyncImage(url: URL(string: appProfile.iconURL)) { image in
+                                         image.resizable()
+                                     } placeholder: {
+                                         ProgressView()
+                                     }
+                                     .frame(width: 50, height: 50)
+                                     .padding([.leading])
+                                     Text(appProfile.name)
+                                         .foregroundColor(.gray)
+                                         .font(.system(size: 14))
+                                         .frame(height: 20) // Set the height of each row
+                                         .onLongPressGesture {
+                                             selectedItem = appProfile
+                                         }
+                                     Spacer()
+                                 }
+                             }
+                         },
+                         label: {
+                             Text(category.capitalized)
+                                 .font(.title3)
+                                 .padding([.top, .bottom])
+                         }
+                     )
+                 }
+//                ForEach(appProfileVM.appProfiles) { appProfile in
+//                    HStack {
+//                        AsyncImage(url: URL(string: appProfile.iconURL)) { image in
+//                            image.resizable()
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+//                        .frame(width: 50, height: 50)
+//                        .padding([.leading])
+//                        Text(appProfile.name)
+//                            .foregroundColor(.gray)
+//                            .font(.system(size: 14))
+//                            .frame(height: 20) // Set the height of each row
+//                            .onLongPressGesture {
+//                                selectedItem = appProfile
+//                            }
+//                        Spacer()
+//                    }
+//                }
+            }.padding()
 //            .id(UUID())
             .sheet(item: $selectedItem) { item in
                 ItemDetailView2(ckRecId: item.appBundleId)
