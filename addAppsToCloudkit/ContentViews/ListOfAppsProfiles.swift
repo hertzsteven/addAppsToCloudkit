@@ -146,9 +146,12 @@ struct ListOfAppsProfiles: View {
                 Task {
                     do {
                    
-                    let listOfNames =   await try getProfilesFromMDM()
+                        let listOfNames =   try await getProfilesFromMDM()
+                        
+                        try await fetchRecords(listOfNames: listOfNames)
 
-                    getAppProfilesFromcloudKit(listOfNames)
+
+//                    getAppProfilesFromcloudKit(listOfNames)
                 
                     } catch let error as ApiError {
                              //  FIXME: -  put in alert that will display approriate error message
@@ -156,6 +159,47 @@ struct ListOfAppsProfiles: View {
                      }
                  }
             }
+        }
+    }
+    
+    func fetchRecords(listOfNames: [String]) async throws -> Void {
+        let recordType = "appProfiles"
+            //        let predicate = NSPredicate(format: "category = %@", "Nnnnn")
+        let query = CKQuery(recordType: recordType, predicate: NSPredicate(format: "TRUEPREDICATE"))
+        
+            //        do {
+        let listofAppProfiles = try await dbs.records(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: 0)
+        
+            // run on main thread
+        await MainActor.run {
+                // make an array to hold the appProfiles
+            var newAppProfiles = [AppProfile]()
+            
+                // Loop through the returned recors
+            for (_, result ) in listofAppProfiles.matchResults {
+                guard let record = try? result.get(),
+                      let cloudkitKeyValue    = record.recordID.recordName as? String,
+                      let nameValue           = record["name"] as? String,
+                      let categoryValue       = record["category"] as? String,
+                      let profileNameValue    = record["profileName"] as? String,
+                      let locationIdValue     = record["locationId"] as? Int,
+                      let iconURLeValue       = record["icon"] as? String,
+                      let appBundleIdValue    = record["appBundleId"] as? String
+                        
+                else { fatalError("didn work") }
+                
+                if listOfNames.contains(nameValue) {
+                        //                            newAppProfiles.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
+                    newAppProfiles.append(AppProfile(appBundleId: appBundleIdValue, locationId: locationIdValue, category: categoryValue, profileName: profileNameValue, name: nameValue, iconURL: iconURLeValue))
+                }
+                
+            }
+//            appos = newAppProfiles
+            appProfileVM.appProfiles = newAppProfiles
+            
+                //        } catch  {
+                //            print("Error: \(error)")
+                //        }
         }
     }
     

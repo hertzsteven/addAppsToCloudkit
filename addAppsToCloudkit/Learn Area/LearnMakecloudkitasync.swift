@@ -16,30 +16,60 @@ struct LearnMakecloudkitasync: View {
         return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
     }
 
+    @StateObject var appProfileVM = AppProfileViewModel()
+
     @State private var appos: [AppProfile] = []
     var body: some View {
-        VStack {
-            Button("do old way cloudkit") {
-                Task {
-                    do {
-                        
-                        let listOfNames =   try await getProfilesFromMDM()
-
-                        try await fetchRecords(listOfNames: listOfNames)
-                        
-                        
-                        for appr in appos {
-                            print(appr.name)
-                                  
-                                  
-                     }
-      
-//                        let records = try await fetchRecords()
-                        // Handle the fetched records...
-                    } catch {
-                        // Handle any errors that occurred...
-                        print("there was an error")
+        NavigationView {
+            ScrollView {
+                
+                VStack {
+                    Button("do old way cloudkit") {
+                        Task {
+                            do {
+                                
+                                let listOfNames =   try await getProfilesFromMDM()
+                                
+                                try await fetchRecords(listOfNames: listOfNames)
+                                
+                                
+                                for appr in appos {
+                                    print(appr.name)
+                                    
+                                    
+                                }
+                                
+                                    //                        let records = try await fetchRecords()
+                                    // Handle the fetched records...
+                            } catch {
+                                    // Handle any errors that occurred...
+                                print("there was an error")
+                            }
+                        }
                     }
+                }
+            }
+        }
+        .task {
+            Task {
+                do {
+                    
+                    let listOfNames =   try await getProfilesFromMDM()
+
+                    try await fetchRecords(listOfNames: listOfNames)
+                    
+                    
+                    for appr in appos {
+                        print(appr.name)
+                              
+                              
+                 }
+  
+//                        let records = try await fetchRecords()
+                    // Handle the fetched records...
+                } catch {
+                    // Handle any errors that occurred...
+                    print("there was an error")
                 }
             }
         }
@@ -81,6 +111,7 @@ struct LearnMakecloudkitasync: View {
                 
             }
             appos = newAppProfiles
+            appProfileVM.appProfiles = newAppProfiles
             
                 //        } catch  {
                 //            print("Error: \(error)")

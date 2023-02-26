@@ -14,9 +14,9 @@ struct addAppsToCloudkitApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LearnMakecloudkitasync()
+//            LearnMakecloudkitasync()
 //            POPupLearn()
-//            ListOfAppsProfiles()
+            ListOfAppsProfiles()
 //            ContentView()
 //            PersonListView()
 //                .environmentObject(appWork)
