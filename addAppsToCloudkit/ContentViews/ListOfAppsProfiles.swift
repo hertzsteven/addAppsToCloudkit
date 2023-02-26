@@ -36,51 +36,51 @@ struct ListOfAppsProfiles: View {
     
     @State private var selectedItem: AppProfile? = nil
     
-    fileprivate func getAppProfilesFromcloudKit(_ listOfNames: [String]) {
-        print("*** begining getAppProfilesFromcloudKit" )
-        let recordType = "appProfiles"
-        
-        let predicate = NSPredicate(format: "profileName != %@", "dummy")
-        let query = CKQuery(recordType: recordType, predicate: predicate)
-        
-        let operation = CKQueryOperation(query: query)
-        operation.resultsLimit = 500 // Set the limit to 500 records
-        
-        var newAppProfiles = [AppProfile]()
-        operation.recordFetchedBlock = { record in
-            
-            guard
-                let cloudkitKeyValue    = record.recordID.recordName as? String,
-                let nameValue           = record["name"] as? String,
-                let categoryValue       = record["category"] as? String,
-                let profileNameValue    = record["profileName"] as? String,
-                let locationIdValue     = record["locationId"] as? Int,
-                let iconURLeValue       = record["icon"] as? String,
-                let appBundleIdValue    = record["appBundleId"] as? String
-                    
-            else { fatalError("didnt work") }
-            
-            if listOfNames.contains(nameValue) {
-                    //                            newAppProfiles.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
-                newAppProfiles.append(AppProfile(appBundleId: appBundleIdValue, locationId: locationIdValue, category: categoryValue, profileName: profileNameValue, name: nameValue, iconURL: iconURLeValue))
-            }
-            
-        }
-        
-        operation.queryCompletionBlock = { (cursor, error) in
-            if let error = error {
-                print("Error fetching records: \(error.localizedDescription)")
-            } else  {
-                print(print("*** success closure of  getAppProfilesFromcloudKit" ))
-                DispatchQueue.main.async {
-                    self.appProfileVM.appProfiles = newAppProfiles.sorted()
-                }
-            }
-        }
-        dbs.add(operation)
-    }
-    
-    
+//    fileprivate func getAppProfilesFromcloudKit(_ listOfNames: [String]) {
+//        print("*** begining getAppProfilesFromcloudKit" )
+//        let recordType = "appProfiles"
+//
+//        let predicate = NSPredicate(format: "profileName != %@", "dummy")
+//        let query = CKQuery(recordType: recordType, predicate: predicate)
+//
+//        let operation = CKQueryOperation(query: query)
+//        operation.resultsLimit = 500 // Set the limit to 500 records
+//
+//        var newAppProfiles = [AppProfile]()
+//        operation.recordFetchedBlock = { record in
+//
+//            guard
+//                let cloudkitKeyValue    = record.recordID.recordName as? String,
+//                let nameValue           = record["name"] as? String,
+//                let categoryValue       = record["category"] as? String,
+//                let profileNameValue    = record["profileName"] as? String,
+//                let locationIdValue     = record["locationId"] as? Int,
+//                let iconURLeValue       = record["icon"] as? String,
+//                let appBundleIdValue    = record["appBundleId"] as? String
+//
+//            else { fatalError("didnt work") }
+//
+//            if listOfNames.contains(nameValue) {
+//                    //                            newAppProfiles.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
+//                newAppProfiles.append(AppProfile(appBundleId: appBundleIdValue, locationId: locationIdValue, category: categoryValue, profileName: profileNameValue, name: nameValue, iconURL: iconURLeValue))
+//            }
+//
+//        }
+//
+//        operation.queryCompletionBlock = { (cursor, error) in
+//            if let error = error {
+//                print("Error fetching records: \(error.localizedDescription)")
+//            } else  {
+//                print(print("*** success closure of  getAppProfilesFromcloudKit" ))
+//                DispatchQueue.main.async {
+//                    self.appProfileVM.appProfiles = newAppProfiles.sorted()
+//                }
+//            }
+//        }
+//        dbs.add(operation)
+//    }
+//
+//
  
     
     
@@ -145,17 +145,11 @@ struct ListOfAppsProfiles: View {
             .task {
                 Task {
                     do {
-                   
-                        let listOfNames =   try await getProfilesFromMDM()
-                        
+                        let listOfNames = try await getProfilesFromMDM()
                         try await fetchRecords(listOfNames: listOfNames)
-
-
-//                    getAppProfilesFromcloudKit(listOfNames)
-                
-                    } catch let error as ApiError {
+                    } catch  { // let error as ApiError {
                              //  FIXME: -  put in alert that will display approriate error message
-                         print(error.description)
+                        print(error.localizedDescription)
                      }
                  }
             }
@@ -194,12 +188,8 @@ struct ListOfAppsProfiles: View {
                 }
                 
             }
-//            appos = newAppProfiles
             appProfileVM.appProfiles = newAppProfiles
             
-                //        } catch  {
-                //            print("Error: \(error)")
-                //        }
         }
     }
     
