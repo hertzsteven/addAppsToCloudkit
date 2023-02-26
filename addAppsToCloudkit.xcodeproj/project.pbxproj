@@ -11,6 +11,7 @@
 		465F20C329A42D8E00DEE306 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F20C229A42D8E00DEE306 /* ProfileResponse.swift */; };
 		466175B829A5240500A0ADD5 /* POPupLearn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466175B729A5240500A0ADD5 /* POPupLearn.swift */; };
 		468DA4D529A57DC000E44A27 /* ScrollViewWithToggleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468DA4D429A57DC000E44A27 /* ScrollViewWithToggleSection.swift */; };
+		468DA4D729A5B45800E44A27 /* LearnMakecloudkitasync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468DA4D629A5B45800E44A27 /* LearnMakecloudkitasync.swift */; };
 		46909D8A299FC81200FA245E /* ListStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46909D89299FC81200FA245E /* ListStub.swift */; };
 		46A12C6C299F11B700230F79 /* addAppsToCloudkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */; };
 		46A12C6E299F11B700230F79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A12C6D299F11B700230F79 /* ContentView.swift */; };
@@ -33,6 +34,7 @@
 		465F20C229A42D8E00DEE306 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		466175B729A5240500A0ADD5 /* POPupLearn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPupLearn.swift; sourceTree = "<group>"; };
 		468DA4D429A57DC000E44A27 /* ScrollViewWithToggleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithToggleSection.swift; sourceTree = "<group>"; };
+		468DA4D629A5B45800E44A27 /* LearnMakecloudkitasync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMakecloudkitasync.swift; sourceTree = "<group>"; };
 		46909D89299FC81200FA245E /* ListStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStub.swift; sourceTree = "<group>"; };
 		46A12C68299F11B700230F79 /* addAppsToCloudkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = addAppsToCloudkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A12C6B299F11B700230F79 /* addAppsToCloudkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAppsToCloudkitApp.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				46ABA76F29A2F13F00B158B4 /* CategoryPickerview.swift */,
 				466175B729A5240500A0ADD5 /* POPupLearn.swift */,
 				468DA4D429A57DC000E44A27 /* ScrollViewWithToggleSection.swift */,
+				468DA4D629A5B45800E44A27 /* LearnMakecloudkitasync.swift */,
 			);
 			path = "Learn Area";
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				468DA4D729A5B45800E44A27 /* LearnMakecloudkitasync.swift in Sources */,
 				46DED5F429A44BBA000A3545 /* ListOfAppsProfiles.swift in Sources */,
 				466175B829A5240500A0ADD5 /* POPupLearn.swift in Sources */,
 				46A12C7D299F157F00230F79 /* ApiHelper.swift in Sources */,

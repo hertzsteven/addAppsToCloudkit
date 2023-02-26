@@ -139,7 +139,7 @@ struct ListOfAppsProfiles: View {
             }.padding()
 //            .id(UUID())
             .sheet(item: $selectedItem) { item in
-                ItemDetailView2(ckRecId: item.appBundleId)
+                ItemDetailView2(appProfile: item, ckRecId: item.appBundleId)
             }
             .navigationTitle("App Profiles")
             .task {
@@ -177,26 +177,8 @@ struct ListOfAppsProfiles: View {
 }
 
 
-struct ItemDetailView2: View {
-        //
-    var dbs : CKDatabase {
-        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
-    }
-    
-    let ckRecId: String
-    
-    @State private var comments: String?
-    
-    var body: some View {
-        VStack {
-            Text("hello !")
-        }
-    }
-}
-
-
-//struct ItemDetailView22: View {
-//
+//struct ItemDetailView2: View {
+//        //
 //    var dbs : CKDatabase {
 //        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
 //    }
@@ -207,32 +189,57 @@ struct ItemDetailView2: View {
 //
 //    var body: some View {
 //        VStack {
-////            Text(<#T##S#>)
-//            if let comments = comments {
-//                Text(comments)
-//                    .padding()
-//            } else {
-//                ProgressView()
-//            }
+//            Text("hello !")
 //        }
-//        .onAppear {
-//            Task {
-//                do {
-//                    let recordID = CKRecord.ID(recordName: ckRecId)
-//                    let record = try await fetchRecord(recordID)
-//                    comments = record["description"] as? String
-//                } catch {
-//                    print("Error fetching record: \(error.localizedDescription)")
-//                }
-//            }
-//        }
-//    }
-//
-//    func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
-//        let record = try await dbs.record(for: recordID)
-//        return record
 //    }
 //}
+
+
+struct ItemDetailView2: View {
+
+    var dbs : CKDatabase {
+        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
+    }
+
+    let appProfile: AppProfile
+    let ckRecId: String
+
+    @State private var comments: String?
+
+    var body: some View {
+        ScrollView {
+        VStack {
+            Text(appProfile.name)
+                .font(.title)
+                .padding()
+            if let comments = comments {
+                Text(comments)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                
+            } else {
+                ProgressView()
+            }
+        }
+    }
+        .onAppear {
+            Task {
+                do {
+                    let recordID = CKRecord.ID(recordName: ckRecId)
+                    let record = try await fetchRecord(recordID)
+                    comments = record["description"] as? String
+                } catch {
+                    print("Error fetching record: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
+    func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
+        let record = try await dbs.record(for: recordID)
+        return record
+    }
+}
 
 struct ListOfAppsProfiles_Previews: PreviewProvider {
     static var previews: some View {
