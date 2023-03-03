@@ -10,7 +10,7 @@ import Foundation
 struct AppProfile: Identifiable, Comparable {
     
     static func < (lhs: AppProfile, rhs: AppProfile) -> Bool {
-          return lhs.name < rhs.name
+        return lhs.name < rhs.name && lhs.appBundleId == rhs.appBundleId
       }
     
     var  id = UUID().uuidString

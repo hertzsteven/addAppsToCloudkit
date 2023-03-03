@@ -36,6 +36,11 @@ struct ListOfAppsProfiles: View {
     
     @State private var selectedItem: AppProfile? = nil
     
+    @State private var selectedAppProfiles: [AppProfile] = []
+    @State private var isAssigning = false
+    @State private var assignedEmployee = "John Doe"
+
+    
 //    fileprivate func getAppProfilesFromcloudKit(_ listOfNames: [String]) {
 //        print("*** begining getAppProfilesFromcloudKit" )
 //        let recordType = "appProfiles"
@@ -86,7 +91,8 @@ struct ListOfAppsProfiles: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: false) {
+//            ScrollView {
                 ForEach(categoryList, id: \.self) { category in
                      DisclosureGroup(
                          content: {
@@ -103,11 +109,32 @@ struct ListOfAppsProfiles: View {
                                          .foregroundColor(.gray)
                                          .font(.system(size: 14))
                                          .frame(height: 20) // Set the height of each row
+                                         .onTapGesture {
+                                             if selectedAppProfiles.contains(appProfile) {
+                                                 selectedAppProfiles.removeAll(where: { $0 == appProfile })
+                                             } else {
+                                                 selectedAppProfiles.append(appProfile)
+                                             }
+                                         }
                                          .onLongPressGesture {
                                              selectedItem = appProfile
                                          }
                                      Spacer()
+                                     if selectedAppProfiles.contains(appProfile) {
+                                         Image(systemName: "checkmark")
+                                             .imageScale(.small)
+                                     }
+                                     
                                  }
+                                 .frame(height: 60.0)
+                                 .padding()
+                                 
+//                                 if selectedAppProfiles.contains(appProfile) {
+                                     .background(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(selectedAppProfiles.contains(appProfile) ? Color.gray : Color.white , lineWidth: 1)
+                                     )
+//                                 }
                              }
                          },
                          label: {
@@ -116,7 +143,7 @@ struct ListOfAppsProfiles: View {
                                  .padding([.top, .bottom])
                          }
                      )
-                 }
+                }
 //                ForEach(appProfileVM.appProfiles) { appProfile in
 //                    HStack {
 //                        AsyncImage(url: URL(string: appProfile.iconURL)) { image in
@@ -136,12 +163,21 @@ struct ListOfAppsProfiles: View {
 //                        Spacer()
 //                    }
 //                }
-            }.padding()
+            }
+            
+            .padding()
+        
 //            .id(UUID())
             .sheet(item: $selectedItem) { item in
                 ItemDetailView2(appProfile: item, ckRecId: item.appBundleId)
             }
+            .sheet(isPresented: $isAssigning) {
+                AssignedBenefitsView(selectedAppProfiles: selectedAppProfiles, assignedEmployee: assignedEmployee)
+//                AssignedBenefitsView(selectedPackages: selectedPackages, assignedEmployee: assignedEmployee)
+            }
+
             .navigationTitle("App Profiles")
+            .navigationBarItems(trailing: assignButton)
             .task {
                 Task {
                     do {
@@ -154,6 +190,17 @@ struct ListOfAppsProfiles: View {
                  }
             }
         }
+    }
+    
+    private var assignButton: some View {
+        Button(action: {
+            isAssigning = true
+        }) { if selectedAppProfiles.count > 0 {
+            Text("Assign (\(selectedAppProfiles.count))")} else {
+                Text("click row to select")
+            }
+        }
+        .disabled(selectedAppProfiles.isEmpty)
     }
     
     func fetchRecords(listOfNames: [String]) async throws -> Void {
@@ -227,6 +274,28 @@ struct ListOfAppsProfiles: View {
 //        }
 //    }
 //}
+
+struct AssignedBenefitsView: View {
+    let selectedAppProfiles: [AppProfile]
+    let assignedEmployee: String
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Employee: \(assignedEmployee)")
+                .font(.headline)
+                .padding(.bottom)
+            Text("Selected Benefits:")
+                .font(.headline)
+                .padding(.bottom)
+            ForEach(selectedAppProfiles) { appProfile in
+                Text("\(appProfile.name) (\(appProfile.profileName))")
+                    .padding(.bottom, 8)
+            }
+        }
+        .padding()
+        .navigationBarTitle("Apps to Assign")
+    }
+}
 
 
 struct ItemDetailView2: View {
