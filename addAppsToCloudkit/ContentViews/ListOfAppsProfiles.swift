@@ -1,9 +1,9 @@
-//
-//  ListOfAppsProfiles.swift
-//  addAppsToCloudkit
-//
-//  Created by Steven Hertz on 2/20/23.
-//
+    //
+    //  ListOfAppsProfiles.swift
+    //  addAppsToCloudkit
+    //
+    //  Created by Steven Hertz on 2/20/23.
+    //
 
 import SwiftUI
 import CloudKit
@@ -39,143 +39,72 @@ struct ListOfAppsProfiles: View {
     @State private var selectedAppProfiles: [AppProfile] = []
     @State private var isAssigning = false
     @State private var assignedEmployee = "John Doe"
-
-    
-//    fileprivate func getAppProfilesFromcloudKit(_ listOfNames: [String]) {
-//        print("*** begining getAppProfilesFromcloudKit" )
-//        let recordType = "appProfiles"
-//
-//        let predicate = NSPredicate(format: "profileName != %@", "dummy")
-//        let query = CKQuery(recordType: recordType, predicate: predicate)
-//
-//        let operation = CKQueryOperation(query: query)
-//        operation.resultsLimit = 500 // Set the limit to 500 records
-//
-//        var newAppProfiles = [AppProfile]()
-//        operation.recordFetchedBlock = { record in
-//
-//            guard
-//                let cloudkitKeyValue    = record.recordID.recordName as? String,
-//                let nameValue           = record["name"] as? String,
-//                let categoryValue       = record["category"] as? String,
-//                let profileNameValue    = record["profileName"] as? String,
-//                let locationIdValue     = record["locationId"] as? Int,
-//                let iconURLeValue       = record["icon"] as? String,
-//                let appBundleIdValue    = record["appBundleId"] as? String
-//
-//            else { fatalError("didnt work") }
-//
-//            if listOfNames.contains(nameValue) {
-//                    //                            newAppProfiles.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
-//                newAppProfiles.append(AppProfile(appBundleId: appBundleIdValue, locationId: locationIdValue, category: categoryValue, profileName: profileNameValue, name: nameValue, iconURL: iconURLeValue))
-//            }
-//
-//        }
-//
-//        operation.queryCompletionBlock = { (cursor, error) in
-//            if let error = error {
-//                print("Error fetching records: \(error.localizedDescription)")
-//            } else  {
-//                print(print("*** success closure of  getAppProfilesFromcloudKit" ))
-//                DispatchQueue.main.async {
-//                    self.appProfileVM.appProfiles = newAppProfiles.sorted()
-//                }
-//            }
-//        }
-//        dbs.add(operation)
-//    }
-//
-//
- 
     
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
-//            ScrollView {
+                    //            ScrollView {
                 ForEach(categoryList, id: \.self) { category in
-                     DisclosureGroup(
-                         content: {
-                             ForEach(appProfileVM.appProfiles.filter { $0.category.contains(category) }) { appProfile in
-                                 HStack {
-                                     AsyncImage(url: URL(string: appProfile.iconURL)) { image in
-                                         image.resizable()
-                                     } placeholder: {
-                                         ProgressView()
-                                     }
-                                     .frame(width: 50, height: 50)
-                                     .padding([.leading])
-                                     Text(appProfile.name)
-                                         .foregroundColor(.gray)
-                                         .font(.system(size: 14))
-                                         .frame(height: 20) // Set the height of each row
-                                         .onTapGesture {
-                                             if selectedAppProfiles.contains(appProfile) {
-                                                 selectedAppProfiles.removeAll(where: { $0 == appProfile })
-                                             } else {
-                                                 selectedAppProfiles.append(appProfile)
-                                             }
-                                         }
-                                         .onLongPressGesture {
-                                             selectedItem = appProfile
-                                         }
-                                     Spacer()
-                                     if selectedAppProfiles.contains(appProfile) {
-                                         Image(systemName: "checkmark")
-                                             .imageScale(.small)
-                                     }
-                                     
-                                 }
-                                 .frame(height: 60.0)
-                                 .padding()
-                                 
-//                                 if selectedAppProfiles.contains(appProfile) {
-                                     .background(
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .stroke(selectedAppProfiles.contains(appProfile) ? Color.gray : Color.white , lineWidth: 1)
-                                     )
-//                                 }
-                             }
-                         },
-                         label: {
-                             Text(category.capitalized)
-                                 .font(.title3)
-                                 .padding([.top, .bottom])
-                         }
-                     )
+                    DisclosureGroup(
+                        content: {
+                            ForEach(appProfileVM.appProfiles.filter { $0.category.contains(category) }) { appProfile in
+                                HStack {
+                                    AsyncImage(url: URL(string: appProfile.iconURL)) { image in
+                                        image.resizable()
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .frame(width: 50, height: 50)
+                                    .padding([.leading])
+                                    Text(appProfile.name)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .frame(height: 20) // Set the height of each row
+                                        .onTapGesture {
+                                            if selectedAppProfiles.contains(appProfile) {
+                                                selectedAppProfiles.removeAll(where: { $0 == appProfile })
+                                            } else {
+                                                selectedAppProfiles.append(appProfile)
+                                            }
+                                        }
+                                        .onLongPressGesture {
+                                            selectedItem = appProfile
+                                        }
+                                    Spacer()
+                                    if selectedAppProfiles.contains(appProfile) {
+                                        Image(systemName: "checkmark")
+                                            .imageScale(.small)
+                                    }
+                                    
+                                }
+                                .frame(height: 60.0)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(selectedAppProfiles.contains(appProfile) ? Color.gray : Color.white , lineWidth: 1)
+                                )
+                            }
+                        },
+                        label: {
+                            Text(category.capitalized)
+                                .font(.title3)
+                                .padding([.top, .bottom])
+                        }
+                    )
                 }
-//                ForEach(appProfileVM.appProfiles) { appProfile in
-//                    HStack {
-//                        AsyncImage(url: URL(string: appProfile.iconURL)) { image in
-//                            image.resizable()
-//                        } placeholder: {
-//                            ProgressView()
-//                        }
-//                        .frame(width: 50, height: 50)
-//                        .padding([.leading])
-//                        Text(appProfile.name)
-//                            .foregroundColor(.gray)
-//                            .font(.system(size: 14))
-//                            .frame(height: 20) // Set the height of each row
-//                            .onLongPressGesture {
-//                                selectedItem = appProfile
-//                            }
-//                        Spacer()
-//                    }
-//                }
             }
             
             .padding()
-        
-//            .id(UUID())
+            
+                //            .id(UUID())
             .sheet(item: $selectedItem) { item in
                 ItemDetailView2(appProfile: item, ckRecId: item.appBundleId)
             }
             .sheet(isPresented: $isAssigning) {
                 AssignedBenefitsView(selectedAppProfiles: selectedAppProfiles, assignedEmployee: assignedEmployee)
-//                AssignedBenefitsView(selectedPackages: selectedPackages, assignedEmployee: assignedEmployee)
             }
-
+            
             .navigationTitle("App Profiles")
             .navigationBarItems(trailing: assignButton)
             .task {
@@ -184,24 +113,27 @@ struct ListOfAppsProfiles: View {
                         let listOfNames = try await getProfilesFromMDM()
                         try await fetchRecords(listOfNames: listOfNames)
                     } catch  { // let error as ApiError {
-                             //  FIXME: -  put in alert that will display approriate error message
+                               //  FIXME: -  put in alert that will display approriate error message
                         print(error.localizedDescription)
-                     }
-                 }
+                    }
+                }
             }
         }
     }
     
     private var assignButton: some View {
-        Button(action: {
+        Button {
             isAssigning = true
-        }) { if selectedAppProfiles.count > 0 {
-            Text("Assign (\(selectedAppProfiles.count))")} else {
+        } label: {
+            if selectedAppProfiles.count > 0 {
+                Text("Assign (\(selectedAppProfiles.count))")
+            } else {
                 Text("click row to select")
             }
         }
         .disabled(selectedAppProfiles.isEmpty)
     }
+
     
     func fetchRecords(listOfNames: [String]) async throws -> Void {
         let recordType = "appProfiles"
@@ -243,7 +175,7 @@ struct ListOfAppsProfiles: View {
     func getProfilesFromMDM() async throws -> [String] {
         let profileResponse: ProfileResponse = try await ApiManager.shared.getData(from: .getProfiles)
         var listOfNames = profileResponse.profiles.compactMap {
-//                            let identifier  = $0.identifier
+                //                            let identifier  = $0.identifier
             if $0.name.contains("Profile-App-1Kiosk") {
                 let nm =  $0.name.replacingOccurrences(of: "Profile-App-1Kiosk ", with: "")
                     //                            let ctg = "kdkd"
@@ -258,27 +190,27 @@ struct ListOfAppsProfiles: View {
 }
 
 
-//struct ItemDetailView2: View {
-//        //
-//    var dbs : CKDatabase {
-//        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
-//    }
-//
-//    let ckRecId: String
-//
-//    @State private var comments: String?
-//
-//    var body: some View {
-//        VStack {
-//            Text("hello !")
-//        }
-//    }
-//}
+    //struct ItemDetailView2: View {
+    //        //
+    //    var dbs : CKDatabase {
+    //        return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
+    //    }
+    //
+    //    let ckRecId: String
+    //
+    //    @State private var comments: String?
+    //
+    //    var body: some View {
+    //        VStack {
+    //            Text("hello !")
+    //        }
+    //    }
+    //}
 
 struct AssignedBenefitsView: View {
     let selectedAppProfiles: [AppProfile]
     let assignedEmployee: String
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Employee: \(assignedEmployee)")
@@ -299,32 +231,32 @@ struct AssignedBenefitsView: View {
 
 
 struct ItemDetailView2: View {
-
+    
     var dbs : CKDatabase {
         return CKContainer(identifier: "iCloud.com.developItSolutions.StudentLogins").publicCloudDatabase
     }
-
+    
     let appProfile: AppProfile
     let ckRecId: String
-
+    
     @State private var comments: String?
-
+    
     var body: some View {
         ScrollView {
-        VStack {
-            Text(appProfile.name)
-                .font(.title)
-                .padding()
-            if let comments = comments {
-                Text(comments)
-                    .frame(maxWidth: .infinity)
+            VStack {
+                Text(appProfile.name)
+                    .font(.title)
                     .padding()
-                
-            } else {
-                ProgressView()
+                if let comments = comments {
+                    Text(comments)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                    
+                } else {
+                    ProgressView()
+                }
             }
         }
-    }
         .onAppear {
             Task {
                 do {
@@ -337,7 +269,7 @@ struct ItemDetailView2: View {
             }
         }
     }
-
+    
     func fetchRecord(_ recordID: CKRecord.ID) async throws -> CKRecord {
         let record = try await dbs.record(for: recordID)
         return record
@@ -349,3 +281,77 @@ struct ListOfAppsProfiles_Previews: PreviewProvider {
         ListOfAppsProfiles()
     }
 }
+
+
+
+    //    fileprivate func getAppProfilesFromcloudKit(_ listOfNames: [String]) {
+    //        print("*** begining getAppProfilesFromcloudKit" )
+    //        let recordType = "appProfiles"
+    //
+    //        let predicate = NSPredicate(format: "profileName != %@", "dummy")
+    //        let query = CKQuery(recordType: recordType, predicate: predicate)
+    //
+    //        let operation = CKQueryOperation(query: query)
+    //        operation.resultsLimit = 500 // Set the limit to 500 records
+    //
+    //        var newAppProfiles = [AppProfile]()
+    //        operation.recordFetchedBlock = { record in
+    //
+    //            guard
+    //                let cloudkitKeyValue    = record.recordID.recordName as? String,
+    //                let nameValue           = record["name"] as? String,
+    //                let categoryValue       = record["category"] as? String,
+    //                let profileNameValue    = record["profileName"] as? String,
+    //                let locationIdValue     = record["locationId"] as? Int,
+    //                let iconURLeValue       = record["icon"] as? String,
+    //                let appBundleIdValue    = record["appBundleId"] as? String
+    //
+    //            else { fatalError("didnt work") }
+    //
+    //            if listOfNames.contains(nameValue) {
+    //                    //                            newAppProfiles.append(Appo(cloudkitKey: cloudkitKeyValue, name: nameValue, category: categoryValue, profileName: profileNameValue))
+    //                newAppProfiles.append(AppProfile(appBundleId: appBundleIdValue, locationId: locationIdValue, category: categoryValue, profileName: profileNameValue, name: nameValue, iconURL: iconURLeValue))
+    //            }
+    //
+    //        }
+    //
+    //        operation.queryCompletionBlock = { (cursor, error) in
+    //            if let error = error {
+    //                print("Error fetching records: \(error.localizedDescription)")
+    //            } else  {
+    //                print(print("*** success closure of  getAppProfilesFromcloudKit" ))
+    //                DispatchQueue.main.async {
+    //                    self.appProfileVM.appProfiles = newAppProfiles.sorted()
+    //                }
+    //            }
+    //        }
+    //        dbs.add(operation)
+    //    }
+    //
+
+
+
+
+
+
+
+    //
+    //                ForEach(appProfileVM.appProfiles) { appProfile in
+    //                    HStack {
+    //                        AsyncImage(url: URL(string: appProfile.iconURL)) { image in
+    //                            image.resizable()
+    //                        } placeholder: {
+    //                            ProgressView()
+    //                        }
+    //                        .frame(width: 50, height: 50)
+    //                        .padding([.leading])
+    //                        Text(appProfile.name)
+    //                            .foregroundColor(.gray)
+    //                            .font(.system(size: 14))
+    //                            .frame(height: 20) // Set the height of each row
+    //                            .onLongPressGesture {
+    //                                selectedItem = appProfile
+    //                            }
+    //                        Spacer()
+    //                    }
+    //                }
